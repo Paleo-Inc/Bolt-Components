@@ -3,7 +3,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { Helpers } from "../helpers/functions/Helpers"; // Assuming toPascalCase is a valid function
 import { ControlTypeParameters } from "../config/ControlTypeParameters";
-import  InfoIcon  from "../components/micro-components/InfoIcon";
+import InfoIcon from "../components/micro-components/InfoIcon";
 import ListGroup from "react-bootstrap/ListGroup";
 import { RenderFilePreviews } from "../helpers/functions/RenderFilePreview";
 
@@ -95,7 +95,6 @@ const BaseInputWrapper = ({
                 modal={modal && modal}
                 modalProps={{ body: false }}
               />
-
             )}
           </Form.Label>
         </div>

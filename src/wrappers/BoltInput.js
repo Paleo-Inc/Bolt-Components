@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { InputGroup, Button } from "react-bootstrap";
 import { BaseInputWrapper } from "./BaseInputWrapper";
 import { ControlTypeParameters } from "../config/ControlTypeParameters";
@@ -32,6 +33,7 @@ const BoltInput = ({
   children,
   step,
   id,
+  allowHide,
   copy,
   copyValue,
   actions,
@@ -103,8 +105,22 @@ const BoltInput = ({
   aria_labelledby = `${id}-label`;
   aria_describedby = helper_text ? helper_text : `${id}-describe`;
 
-  const propClasses = hiddenValue ? "hidden-dots-input" : "";
-  const className = `${propClasses} ${input_classes}`.trim();
+  const [className, setClassName] = useState("");
+  const [isInputVisible, setIsInputVisible] = useState(true);
+
+  // Function to toggle the visibility of the password
+  const toggleInputVisibility = () => {
+    setIsInputVisible((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    // Compute the className based on hiddenValue or isInputVisible
+    const hideClasses =
+      hiddenValue || !isInputVisible ? "hidden-dots-input" : "";
+    const newClassName = `${hideClasses} ${input_classes}`.trim();
+    // Update the className state
+    setClassName(newClassName);
+  }, [hiddenValue, isInputVisible]);
 
   // Effect to synchronize state with props
   useEffect(() => {
@@ -184,7 +200,7 @@ const BoltInput = ({
     isInvalid,
     showDefaultValidator
   );
-//The below should be in its file and have default states already set up.  Search "TODO OPTIONS" for related.
+  //The below should be in its file and have default states already set up.  Search "TODO OPTIONS" for related.
   const defaultProps = {
     type,
     name,
@@ -206,6 +222,7 @@ const BoltInput = ({
     validationCheck,
     ref: inputRef,
     size: size,
+    allowHide,
     id: id,
     clearable: clearable,
     aria_label,
@@ -287,7 +304,7 @@ const BoltInput = ({
     <BaseInputWrapper {...baseInputWrapperProps}>
       <InputGroup className={input_group_classes}>
         {pre_text ? (
-          <InputGroup.Text className={propClasses} id={id}>
+          <InputGroup.Text className={hideClasses} id={id}>
             {pre_text}
           </InputGroup.Text>
         ) : null}
@@ -301,7 +318,7 @@ const BoltInput = ({
         )}
 
         {post_text ? (
-          <InputGroup.Text className={propClasses} id={id}>
+          <InputGroup.Text className={hideClasses} id={id}>
             {post_text}
           </InputGroup.Text>
         ) : null}
@@ -327,6 +344,20 @@ const BoltInput = ({
             }
             onCopy={() => setCopied(true)}
           />
+        )}
+
+        {allowHide && (
+          <Button
+            variant="light"
+            className={`${className}`}
+            onClick={() => toggleInputVisibility(!isInputVisible)}
+            aria-label={isInputVisible ? "Hide input" : "Show input"}
+          >
+            <FeatherIcon
+              icon={isInputVisible ? "eye" : "eye-off"}
+              size="16px"
+            />
+          </Button>
         )}
 
         {children}

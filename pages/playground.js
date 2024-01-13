@@ -25,7 +25,6 @@ export default function Inputs() {
   // Dynamic state object for each controlType
   const [controlStates, setControlStates] = useState({});
   const [selectedControlType, setSelectedControlType] = useState("text");
-  console.log("selectedControlType", selectedControlType);
 
   // Initial state setup
   let initialState = {};
@@ -69,10 +68,7 @@ export default function Inputs() {
     return template;
   };
 
-  console.log("Value:", controlStates[selectedControlType]?.value);
-
   const [controlCode, setControlCode] = useState(getControlCodeTemplate());
-  console.log("controlCode", controlCode);
 
   useEffect(() => {
     // This function will run whenever selectedControlType or controlStates changes

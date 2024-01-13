@@ -15,7 +15,9 @@ const inputProperties: InputProperty[] = [
   { prop: "hiddenValue", dataType: "switch", default_value: false , standard: false },
   { prop: "disabled", dataType: "switch", default_value: false , standard: false },
   { prop: "required", dataType: "switch", default_value: false , standard: false },
+  { prop: "plaintext", dataType: "switch", default_value: false , standard: false },
   { prop: "floatingLabel", dataType: "switch", default_value: false , standard: false },
+  { prop: "allowHide", dataType: "switch", default_value: false , standard: false },
   { prop: "showDefaultValidator", dataType: "switch", default_value: false , standard: false },
   { prop: "multiple", dataType: "switch", default_value: false , standard: false },
   { prop: "readOnly", dataType: "switch", default_value: false , standard: false },
@@ -40,8 +42,8 @@ const inputProperties: InputProperty[] = [
   { prop: "step", dataType: "number", default_value: null , standard: false },
   { prop: "minCharacters", dataType: "number", default_value: null , standard: false },
   { prop: "maxCharacters", dataType: "number", default_value: null , standard: false },
-  { prop: "plaintext", dataType: "switch", default_value: false , standard: false },
   { prop: "value", dataType: "text", default_value: "" , standard: false },
+  
 ];
 
 export default inputProperties;
