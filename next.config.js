@@ -1,4 +1,4 @@
 module.exports = {
-  basePath: "/Paleo-Inc/Bolt-Components",
-  assetPrefix: "/Paleo-Inc/Bolt-Components/",
+  basePath: "/paleo-inc.github.io/Bolt-Components",
+  assetPrefix: "/paleo-inc.github.io/Bolt-Components/",
 };
