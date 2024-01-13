@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Col, Container, Row, Card } from "react-bootstrap";
+import {
+  Col,
+  Container,
+  Row,
+  Card,
+  NavLink,
+  NavItem,
+  Form,
+  Alert,
+  Nav,
+  Accordion,
+} from "react-bootstrap";
 import { BoltInput } from "../src/wrappers/BoltInput";
-import Accordion from "react-bootstrap/Accordion";
-import Nav from "react-bootstrap/Nav";
-import Alert from "react-bootstrap/Alert";
 import Config from "../src/config/Config";
-import NavLink from "react-bootstrap/NavLink";
-import NavItem from "react-bootstrap/NavItem";
 import { Helpers } from "../src/helpers/functions/Helpers";
 
 const config = new Config();
@@ -183,14 +189,21 @@ export default function Inputs() {
                   id={control.type}
                   className={
                     selectedControlType === control.type
-                      ? "shadow border-left border-4 blue-left-border rounded"
+                      ? "shadow-sm rounded"
                       : ""
                   }
                 >
                   <Card className="border m-0" key={controlIndex}>
                     <Card.Header className="border-bottom">
                       <div className="d-flex justify-content-between aic">
-                        {control.type}
+                        {Helpers.CapitalizeWords(control.type)}
+                        <Form.Check
+                          readOnly
+                          checked={
+                            selectedControlType === control.type ? true : false
+                          }
+                          type="radio"
+                        />
                       </div>
                     </Card.Header>
                     <Card.Body>
@@ -257,7 +270,6 @@ export default function Inputs() {
                     noLabel
                     value={controlCode}
                     copy
-                   
                   ></BoltInput>
                 </div>
                 <Card className="border">
