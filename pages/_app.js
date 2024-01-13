@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 //TODO remove this when published
-const theme = "dark";
+const theme = "light";
 
 function MyApp({ Component, pageProps }) {
   return (
