@@ -21,6 +21,7 @@ const inputProperties: InputProperty[] = [
   { prop: "showDefaultValidator", dataType: "switch", default_value: false , standard: false },
   { prop: "multiple", dataType: "switch", default_value: false , standard: false },
   { prop: "readOnly", dataType: "switch", default_value: false , standard: false },
+  { prop: "column", dataType: "text", default_value: "" , standard: false },
   { prop: "placeholder", dataType: "text", default_value: "" , standard: false },
   { prop: "errorMessageIfInvalid", dataType: "text", default_value: "" , standard: false },
   { prop: "modal", dataType: "text", default_value: "" , standard: false },

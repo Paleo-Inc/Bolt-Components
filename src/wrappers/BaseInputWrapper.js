@@ -1,6 +1,6 @@
 // Import necessary dependencies and components
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Form, Col } from "react-bootstrap";
 import { Helpers } from "../helpers/functions/Helpers"; // Assuming toPascalCase is a valid function
 import { ControlTypeParameters } from "../config/ControlTypeParameters";
 import InfoIcon from "../components/micro-components/InfoIcon";
@@ -37,6 +37,7 @@ const BaseInputWrapper = ({
   textIfFalse,
   children,
   files,
+  column,
   ...props
 }) => {
   const dataType = ControlTypeParameters[controlType]?.data_type;
@@ -77,9 +78,11 @@ const BaseInputWrapper = ({
   //   describeId,
   // );
 
+  console.log("Column:", column);
+
   // Return the JSX for the BaseInputWrapper component
   return (
-    <Form.Group className={`mb-3`} {...props}>
+    <Form.Group as={Col} className={`mb-3 col-${column}`} {...props}>
       {noLabel || floatingLabel ? null : (
         <div>
           <Form.Label

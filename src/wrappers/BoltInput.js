@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { InputGroup, Button } from "react-bootstrap";
 import { BaseInputWrapper } from "./BaseInputWrapper";
@@ -49,6 +49,7 @@ const BoltInput = ({
   htmlFor,
   noLabel,
   pre_text,
+  column,
   aria_label,
   aria_labelledby,
   aria_describedby,
@@ -213,6 +214,7 @@ const BoltInput = ({
     size: size,
     allowHide,
     id: id,
+    column,
     clearable: clearable,
     aria_label,
     aria_labelledby,
@@ -286,12 +288,13 @@ const BoltInput = ({
     textIfTrue,
     textIfFalse,
     files,
+    column,
     ...props,
   };
 
   return (
     <BaseInputWrapper {...baseInputWrapperProps}>
-      <InputGroup className={input_group_classes}>
+      <InputGroup className={`${input_group_classes}`}>
         {pre_text ? (
           <InputGroup.Text className={hideClasses} id={id}>
             {pre_text}
@@ -299,9 +302,7 @@ const BoltInput = ({
         ) : null}
 
         {floatingLabel ? (
-          <FloatingLabel label={label}>
-            {control}
-          </FloatingLabel>
+          <FloatingLabel label={label}>{control}</FloatingLabel>
         ) : (
           <>{control}</>
         )}
