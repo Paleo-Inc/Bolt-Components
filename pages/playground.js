@@ -138,7 +138,6 @@ export default function Inputs() {
                     id="#nav"
                     onSelect={setSelectedControlType}
                     className="flex-md-column"
-              
                   >
                     {controlTypes.map((control) => (
                       <NavItem key={control.type}>
@@ -227,10 +226,17 @@ export default function Inputs() {
                     <Card.Body className="bg-light scrollable">
                       <Row>
                         {inputProperties.map((property, propIndex) => (
-                          <Col xs={property.dataType === "switch" ? 6 : 12} sm="6" md="6" className="" key={propIndex}>
+                          <Col
+                            xs={property.dataType === "switch" ? 6 : 12}
+                            sm="6"
+                            md="6"
+                            className=""
+                            key={propIndex}
+                          >
                             <BoltInput
                               label={property.prop}
                               controlType={property.dataType}
+                              tooltip_text={property.description}
                               value={
                                 controlStates[selectedControlType]
                                   ? controlStates[selectedControlType][

@@ -24,7 +24,7 @@ const InfoIcon = ({ tooltipText, modal, modalProps }) => {
     <Button
       variant="transparent"
       size="sm"
-      className="p-0 px-1"
+      className="p-0 px-1 text-muted"
       onClick={handleIconClick}
     >
       {/* //Uncomment if error is fixed */}
