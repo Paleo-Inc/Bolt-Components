@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  Form,
-} from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const Boolean = ({
   label,
@@ -41,7 +39,7 @@ const Boolean = ({
       case "checkbox":
         return (
           <Form.Check
-            className="mt-2"
+            className={`${className}`}
             type={type}
             name={name}
             cyId={cyId}
@@ -65,7 +63,7 @@ const Boolean = ({
             isInvalid={isInvalid}
             onBlur={onBlur}
             onChange={onChange}
-            className={`mt-2 ${className}`}
+            className={`${className}`}
             checked={checked ?? default_value}
             id={id || elementId}
             aria-labelledby={`${id}-label`}

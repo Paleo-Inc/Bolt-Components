@@ -274,7 +274,13 @@ export default function Inputs() {
                 </div>
                 <Card className="border">
                   <Accordion.Item>
-                    <Card.Header>Props</Card.Header>
+                   
+                    <Card.Body className="border-bottom">
+                      <div>
+                        <Card.Title>Options</Card.Title>
+                        <Card.Text>These options reflect the component's prop attributes.</Card.Text>
+                      </div>
+                    </Card.Body>
                     <Card.Body className="bg-light scrollable">
                       <Row>
                         {inputProperties.map((property, propIndex) => (
