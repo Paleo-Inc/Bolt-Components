@@ -154,7 +154,7 @@ export default function Inputs() {
               </Card>
             </Col>
             <Col
-              className="smooth-scroll d-flex flex-column gap-3 mb-3 mb-sm-0"
+              className="smooth-scroll d-flex flex-column gap-3 mb-3 mb-sm-0 "
               xs={12}
               sm={6}
               md={5}
@@ -165,7 +165,7 @@ export default function Inputs() {
                   id={control.type}
                   className={
                     selectedControlType === control.type
-                      ? "shadow-sm rounded"
+                      ? "shadow-sm rounded sticky-top"
                       : "d-none"
                   }
                 >
