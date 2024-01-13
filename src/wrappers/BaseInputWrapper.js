@@ -7,7 +7,7 @@ import  InfoIcon  from "../components/micro-components/InfoIcon";
 import ListGroup from "react-bootstrap/ListGroup";
 import { RenderFilePreviews } from "../helpers/functions/RenderFilePreview";
 
-// Define a functional component called BaseInputWrapper that takes various props as input
+//The below should be in its file and have default states already set up.  Search "TODO OPTIONS" for related.
 const BaseInputWrapper = ({
   label,
   id,
