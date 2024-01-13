@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-const CopyButton = ({ onCopy, value, ...props }) => {
+const CopyButton = ({ variant, onCopy, value, className, ...props }) => {
   const [copied, setCopied] = useState(false);
 
   const handleClick = () => {
@@ -12,10 +12,15 @@ const CopyButton = ({ onCopy, value, ...props }) => {
       setCopied(false);
     }, 1800);
   };
+  variant = variant || "light";
   return (
-    <CopyToClipboard onCopy={() => setCopied(true)} text={value}>
+    <CopyToClipboard
+      onCopy={() => setCopied(true)}
+      text={value}
+      className={className}
+    >
       <Button
-        variant="outline-secondary"
+        variant={variant}
         onClick={handleClick}
         className={`copy-button ${copied ? "copied" : ""}`}
       >
