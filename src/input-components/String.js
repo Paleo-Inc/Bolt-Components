@@ -68,40 +68,7 @@ const String = ({
             aria-describedby={aria_describedby}
           />
         );
-      case "password":
-        const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-        type = isPasswordVisible ? "text" : "password";
-        hiddenValue = isPasswordVisible;
-        const icon = isPasswordVisible ? "eye" : "eye-off";
-        return (
-          <InputGroup>
-            <Form.Control
-              type={type}
-              placeholder={placeholder}
-              name={name}
-              value={value}
-              isInvalid={isInvalid}
-              onBlur={onBlur}
-              minCharacters={minCharacters}
-              maxCharacters={maxCharacters}
-              onChange={onChange}
-              id={id}
-              cyId={cyId}
-              aria_labelledby={aria_labelledby}
-              aria-describedby={aria_describedby}
-              className={className}
-              {...props}
-            />
-            <Button
-              variant="light"
-              className="border aic"
-              onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-              aria-label={isPasswordVisible ? "Hide password" : "Show password"}
-            >
-              <FeatherIcon icon={icon} size="16px" />
-            </Button>
-          </InputGroup>
-        );
+
       case "email":
         return (
           <Form.Control

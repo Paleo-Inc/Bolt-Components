@@ -9,7 +9,6 @@ import {
   NavLink,
   NavItem,
   Form,
-  Alert,
   Nav,
   Accordion,
 } from "react-bootstrap";
@@ -108,22 +107,6 @@ export default function Inputs() {
     setControlCode(getControlCodeTemplate());
   };
 
-  const alert = (
-    <Alert
-      className="mb-2"
-      variant={selectedControlType ? "primary" : "warning"}
-    >
-      {selectedControlType ? (
-        <>
-          You are now controlling the{" "}
-          <u className="fw-bold">{selectedControlType}</u> control type input
-        </>
-      ) : (
-        "Select a control type to control the props"
-      )}
-    </Alert>
-  );
-
   const handleInputChange = (newValue, controlType) => {
     setControlStates((prevStates) => ({
       ...prevStates,
@@ -143,7 +126,7 @@ export default function Inputs() {
       <Container fluid>
         <div className="mb-4">
           <Row>
-            <Col xs={0} lg={2} className="d-none d-lg-block">
+            <Col xs={12} sm={12} md={2} className="mb-3 mb-md-0">
               <Card className="border sticky-top">
                 <Card.Header className="border-bottom">
                   Quick navigation
@@ -154,7 +137,8 @@ export default function Inputs() {
                     variant="pills"
                     id="#nav"
                     onSelect={setSelectedControlType}
-                    className="flex-column"
+                    className="flex-md-column"
+              
                   >
                     {controlTypes.map((control) => (
                       <NavItem key={control.type}>
@@ -171,9 +155,10 @@ export default function Inputs() {
               </Card>
             </Col>
             <Col
-              className="smooth-scroll d-flex flex-column gap-3"
-              xs={6}
-              lg={5}
+              className="smooth-scroll d-flex flex-column gap-3 mb-3 mb-sm-0"
+              xs={12}
+              sm={6}
+              md={5}
             >
               {controlTypes.map((control, controlIndex) => (
                 <div
@@ -182,10 +167,10 @@ export default function Inputs() {
                   className={
                     selectedControlType === control.type
                       ? "shadow-sm rounded"
-                      : ""
+                      : "d-none"
                   }
                 >
-                  <Card className="border m-0" key={controlIndex}>
+                  <Card className={`border m-0`} key={controlIndex}>
                     <Card.Header className="border-bottom">
                       <div className="d-flex justify-content-between aic">
                         {Helpers.CapitalizeWords(control.type)}
@@ -215,9 +200,8 @@ export default function Inputs() {
               ))}
             </Col>
 
-            <Col xs={6} lg={5}>
+            <Col xs={12} sm={6} md={5}>
               <div className="sticky-top">
-                {alert}
                 <div className="position-relative">
                   <SyntaxHighlighter
                     className="p-3 rounded"
@@ -243,7 +227,7 @@ export default function Inputs() {
                     <Card.Body className="bg-light scrollable">
                       <Row>
                         {inputProperties.map((property, propIndex) => (
-                          <Col xs="12" md="6" className="" key={propIndex}>
+                          <Col xs={property.dataType === "switch" ? 6 : 12} sm="6" md="6" className="" key={propIndex}>
                             <BoltInput
                               label={property.prop}
                               controlType={property.dataType}

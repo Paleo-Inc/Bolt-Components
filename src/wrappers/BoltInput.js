@@ -87,7 +87,6 @@ const BoltInput = ({
   const [touched, setTouched] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [files, setFiles] = useState(null);
-  const inputRef = useRef(null);
 
   // Default values for various props
   id = id || Helpers.ToKebabCase(label || default_label);
@@ -108,7 +107,7 @@ const BoltInput = ({
   const [className, setClassName] = useState("");
   const [isInputVisible, setIsInputVisible] = useState(true);
 
-  // Function to toggle the visibility of the password
+  // Function to toggle the visibility of the input
   const toggleInputVisibility = () => {
     setIsInputVisible((prevState) => !prevState);
   };
@@ -176,15 +175,6 @@ const BoltInput = ({
     setTouched(!!value);
   };
 
-  // Clear input function
-  const clearInput = () => {
-    if (inputRef.current) {
-      inputRef.current.value = "";
-      setValue("");
-      onChange?.(null, "");
-    }
-  };
-
   // Combining custom and passed onBlur handlers
   const combinedOnBlurHandler = (event) => {
     handleInputBlur();
@@ -220,7 +210,6 @@ const BoltInput = ({
     minRows: minRows,
     checked: value,
     validationCheck,
-    ref: inputRef,
     size: size,
     allowHide,
     id: id,
@@ -310,7 +299,7 @@ const BoltInput = ({
         ) : null}
 
         {floatingLabel ? (
-          <FloatingLabel controlId={id} label={label}>
+          <FloatingLabel label={label}>
             {control}
           </FloatingLabel>
         ) : (

@@ -65,9 +65,7 @@ const SelectInput = ({
           </option>
         ))
       ) : (
-        <option selected disabled>
-          {"No available options"}
-        </option>
+        <option>{"No available options"}</option>
       )}
     </Form.Select>
   );

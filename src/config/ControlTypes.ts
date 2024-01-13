@@ -4,7 +4,6 @@ export interface ControlType {
     | "text"
     | "number"
     | "email"
-    | "password"
     | "textarea"
     | "url"
     | "checkbox"
@@ -19,7 +18,6 @@ const ControlTypes: ControlType[] = [
   { type: "text" },
   { type: "number" },
   { type: "email" },
-  { type: "password" },
   { type: "textarea" },
   { type: "url" },
   { type: "checkbox" },
