@@ -164,7 +164,7 @@ export default function Inputs() {
                           href={`#${control.type}`}
                           eventKey={control.type}
                         >
-                          {Helpers.capitalizeWords(control.type)}
+                          {Helpers.CapitalizeWords(control.type)}
                         </NavLink>
                       </NavItem>
                     ))}

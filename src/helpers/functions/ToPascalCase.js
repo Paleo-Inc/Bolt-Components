@@ -1,4 +1,4 @@
-function toPascalCase(str) {
+function ToPascalCase(str) {
   // Check if the input is undefined, null, or an empty string
   if (str === undefined || str === null || str.trim() === "") {
     return "invalid-input";
@@ -11,4 +11,4 @@ function toPascalCase(str) {
     .join("");
 }
 
-export { toPascalCase };
+export { ToPascalCase };

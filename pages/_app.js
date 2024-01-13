@@ -4,9 +4,11 @@ import React from "react";
 const theme = "dark";
 
 function MyApp({ Component, pageProps }) {
-  return <div data-bs-theme={theme}>
-    <Component {...pageProps} />
-  </div>;
+  return (
+    <div data-bs-theme={theme}>
+      <Component {...pageProps} />
+    </div>
+  );
 }
 
 export default MyApp;

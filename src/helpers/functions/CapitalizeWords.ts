@@ -1,4 +1,4 @@
-function capitalizeWords(str: string): string {
+function CapitalizeWords(str: string): string {
   return str
     .split(" ")
     .map((word) => {
@@ -6,4 +6,4 @@ function capitalizeWords(str: string): string {
     })
     .join(" ");
 }
-export default capitalizeWords;
+export { CapitalizeWords };
