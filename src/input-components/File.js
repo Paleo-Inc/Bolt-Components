@@ -1,9 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form } from "react-bootstrap";
-
-// Todo
-//-Add prop for min and max file size
-//Create a function taht takes in accetpedFileTypes as an array of strings and returns a string of accepted file types
 
 const FileInput = ({
   label,

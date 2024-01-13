@@ -124,7 +124,7 @@ const BoltInput = ({
     setValue(eventKey);
   };
 
-  // Generalized input change handler
+  // Generalized input change handler // There is already a function like this in the BaseInputWrapper; can use it
   const handleInputChange = (e) => {
     const { type, checked, value: inputValue } = e.target;
     const finalValue =

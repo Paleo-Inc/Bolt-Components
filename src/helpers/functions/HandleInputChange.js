@@ -1,15 +1,15 @@
-const HandleInputChange = (e, currentValue, setValue, onChange) => {
+const handleInputChange = (event, setValue, onChange) => {
+  const { type, value, checked } = event.target;
   let newValue;
 
-  switch (e.target.type) {
+  switch (type) {
     case "checkbox":
     case "switch":
-      newValue = e.target.checked;
+      newValue = checked;
       break;
     case "text":
     case "color":
     case "textarea":
-    case "number":
     case "email":
     case "url":
     case "password":
@@ -17,22 +17,21 @@ const HandleInputChange = (e, currentValue, setValue, onChange) => {
     case "number":
     case "select":
     case "multi_select":
-      case "file":
+    case "file":
     case "date":
     case "date_time":
     case "date_picker":
-      newValue = e.target.value;
+      newValue = value;
       break;
     default:
-      console.warn(`Unhandled input type: ${e.target.type}`);
-      return;
+      throw new Error(`Unhandled input type: ${type}`);
   }
 
   setValue(newValue);
 
   if (onChange) {
-    onChange(e, newValue);
+    onChange(event, newValue);
   }
 };
 
-export { HandleInputChange };
+export { handleInputChange };

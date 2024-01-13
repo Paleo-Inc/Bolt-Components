@@ -90,7 +90,7 @@ class TestData {
       type: "audio/flac",
       data: "FLAC audio data",
     },
-  ];
+  ]
   static defaultColors = [
     { label: "Red", value: "#FF0000" },
     { label: "Green", value: "#61D095" },

@@ -1,10 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react";
-import Head from "next/head";
-import Router, { useRouter } from "next/router";
+import React from "react";
+//TODO remove this when published
+const theme = "dark";
 
 function MyApp({ Component, pageProps }) {
-  return <Component data-bs-theme="dark" {...pageProps} />;
+  return <div data-bs-theme={theme}>
+    <Component {...pageProps} />
+  </div>;
 }
 
 export default MyApp;

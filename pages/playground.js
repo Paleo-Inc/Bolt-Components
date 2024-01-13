@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Container, Row, Card } from "react-bootstrap";
 import { BoltInput } from "../src/wrappers/BoltInput";
 import Accordion from "react-bootstrap/Accordion";
@@ -65,14 +65,6 @@ export default function Inputs() {
     }
   };
 
-  const defaultControl = `
-  <BoltInput
-  controlType="${selectedControlType}"
-  label="Assistant name"
-  placeholder="Assistant name"
-  name="name"
-></BoltInput>;
-`;
   const [controlCode, setControlCode] = useState(`
     <BoltInput
       controlType="${selectedControlType}"
@@ -84,8 +76,8 @@ export default function Inputs() {
 
   console.log("Control code", controlCode);
 
-  const updateControlCode = () => {
-    // You can modify the control string as needed
+  useEffect(() => {
+    // This function will run whenever selectedControlType changes
     const updatedControl = `
       <BoltInput
         controlType="${selectedControlType}"
@@ -94,8 +86,11 @@ export default function Inputs() {
         name="updatedName"
       ></BoltInput>
     `;
-    setControlCode(updatedControl); // Pass updatedControl, not updateControlCode
-    console.log("Updated control code", updatedControl);
+    setControlCode(updatedControl);
+  }, [selectedControlType]); // Dependency array
+
+  const updateControlType = (newType) => {
+    setSelectedControlType(newType);
   };
 
   // Function to update state based on input type and controlType
@@ -122,7 +117,7 @@ export default function Inputs() {
     const controlType =
       event.currentTarget.id || clickedDiv.getAttribute("eventkey");
     setSelectedControlType(controlType);
-    updateControlCode(controlType);
+    setControlCode(controlType);
   };
 
   const alert = (
@@ -262,6 +257,7 @@ export default function Inputs() {
                     noLabel
                     value={controlCode}
                     copy
+                   
                   ></BoltInput>
                 </div>
                 <Card className="border">
