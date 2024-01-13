@@ -41,6 +41,7 @@ const inputProperties: InputProperty[] = [
   { prop: "minCharacters", dataType: "number", default_value: null , standard: false },
   { prop: "maxCharacters", dataType: "number", default_value: null , standard: false },
   { prop: "plaintext", dataType: "switch", default_value: false , standard: false },
+  { prop: "value", dataType: "text", default_value: "" , standard: false },
 ];
 
 export default inputProperties;

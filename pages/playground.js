@@ -126,6 +126,16 @@ export default function Inputs() {
     </Alert>
   );
 
+  const handleInputChange = (newValue, controlType) => {
+    setControlStates((prevStates) => ({
+      ...prevStates,
+      [controlType]: {
+        ...prevStates[controlType],
+        value: newValue, // Update the value for this specific control type
+      },
+    }));
+  };
+
   return (
     <div
       className="main-content py-4 m-4"
@@ -197,6 +207,9 @@ export default function Inputs() {
                         options={[controlStates[control.type]?.options].filter(
                           Boolean
                         )}
+                        onChange={(e) =>
+                          handleInputChange(e.target.value, control.type)
+                        }
                       />
                     </Card.Body>
                   </Card>
