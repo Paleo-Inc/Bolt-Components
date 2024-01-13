@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { CopyButton } from "../src/components/micro-components/CopyButton";
 import {
   Col,
   Container,
@@ -220,14 +222,17 @@ export default function Inputs() {
             <Col xs={6} lg={5}>
               <div className="sticky-top">
                 {alert}
-                <div>
-                  <BoltInput
-                    controlType={"textarea"}
-                    minRows={1}
-                    noLabel
+                <div className="position-relative">
+                  <SyntaxHighlighter
+                    className="p-3 rounded"
+                    language="javascript"
+                  >
+                    {controlCode}
+                  </SyntaxHighlighter>
+                  <CopyButton
+                    className="position-absolute top-0 end-0 btn-sm m-1"
                     value={controlCode}
-                    copy
-                  />
+                  ></CopyButton>
                 </div>
                 <Card className="border">
                   <Accordion.Item>
