@@ -12,7 +12,7 @@ import RenderInputActions from "../helpers/functions/RenderInputActions";
 import Config from "../config/Config";
 
 const config = new Config();
-
+//The below should be in its file and have default states already set up.  Search "TODO OPTIONS" for related.
 const BoltInput = ({
   label,
   placeholder,
@@ -108,8 +108,8 @@ const BoltInput = ({
 
   // Effect to synchronize state with props
   useEffect(() => {
-    setValue(value);
-  }, [value, setValue]);
+    setValue(propValue);
+  }, [propValue]);
 
   // Handler for keyDown event
   const handleKeyDown = (e) => {
@@ -184,7 +184,7 @@ const BoltInput = ({
     isInvalid,
     showDefaultValidator
   );
-
+//The below should be in its file and have default states already set up.  Search "TODO OPTIONS" for related.
   const defaultProps = {
     type,
     name,

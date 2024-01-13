@@ -22,81 +22,76 @@ const inputProperties = config.getInputProperties();
 export default function Inputs() {
   // Dynamic state object for each controlType
   const [controlStates, setControlStates] = useState({});
-  const [selectedControlType, setSelectedControlType] = useState("");
+  const [selectedControlType, setSelectedControlType] = useState("text");
   console.log("selectedControlType", selectedControlType);
+
+  // Initial state setup
+  let initialState = {};
+
+  inputProperties.forEach((prop) => {
+    initialState[prop.prop] = prop.default_value;
+  });
 
   // Function to initialize state for a new controlType
   const initializeControlState = (type) => {
     if (!controlStates[type]) {
+      // Filter inputProperties to include only those with default_value = true
+      const propertiesWithDefaultValueTrue = inputProperties.filter(
+        (prop) => prop.default_value === true
+      );
+      // Create initial state object with properties having default_value = true
+      let initialState = {};
+      propertiesWithDefaultValueTrue.forEach((prop) => {
+        initialState[prop.prop] = prop.default_value;
+      });
+      // Update the state with the initialState for the control type
       setControlStates((prevState) => ({
         ...prevState,
-        [type]: {
-          isInvalid: false,
-          placeholder: "",
-          rows: null,
-          min: null,
-          max: null,
-          errorMessageIfInvalid: "",
-          label: "",
-          helper_text: "",
-          copy: false,
-          copyValue: "",
-          minRows: null,
-          tooltip_text: "",
-          pre_text: "",
-          post_text: "",
-          noLabel: false,
-          modal: false,
-          pre_text: "",
-          post_text: "",
-          flush: false,
-          actions: "",
-          size: "",
-          options: "",
-          disabled: false,
-          step: null,
-          floatingLabel: false,
-          minCharacters: null,
-          maxCharacters: null,
-          hiddenValue: false,
-          textIfTrue: "",
-          textIfFalse: "",
-          required: false,
-          showDefaultValidator: false,
-          multiple: false,
-          readOnly: false,
-          plaintext: false,
-        },
+        [type]: { ...initialState },
       }));
     }
   };
 
-  const [controlCode, setControlCode] = useState(`
-    <BoltInput
-      controlType="${selectedControlType}"
-      label="Assistant name"
-      placeholder="Assistant name"
-      name="name"
-    ></BoltInput>
-  `);
+  const getControlCodeTemplate = () => {
+    // Start the template with the fixed controlType
+    let template = `<BoltInput\n    controlType="${selectedControlType}"\n`;
+    // Dynamically add properties from the controlStates for the selectedControlType
+    const currentState = controlStates[selectedControlType];
+    for (const property in currentState) {
+      if (currentState.hasOwnProperty(property)) {
+        template += `    ${property}="${currentState[property]}"\n`;
+      }
+    }
+    // Close the template
+    template += `  />`;
+    return template;
+  };
 
-  console.log("Control code", controlCode);
+  console.log("Value:", controlStates[selectedControlType]?.value);
+
+  const [controlCode, setControlCode] = useState(getControlCodeTemplate());
+  console.log("controlCode", controlCode);
 
   useEffect(() => {
-    // This function will run whenever selectedControlType changes
-    const updatedControl = `
-      <BoltInput
-        controlType="${selectedControlType}"
-        label="Updated Assistant name"
-        placeholder="Updated Assistant name"
-        name="updatedName"
-      ></BoltInput>
-    `;
+    // This function will run whenever selectedControlType or controlStates changes
+    const updatedControl = getControlCodeTemplate();
     setControlCode(updatedControl);
-  }, [selectedControlType]); // Dependency array
+  }, [selectedControlType, controlStates]); // Include controlStates in the dependency array
 
-  const updateControlType = (newType) => {
-    setSelectedControlType(newType);
+  // Function to handle the div click event
+  const handleDivClick = (event) => {
+    // Accessing the clicked div
+    const clickedDiv = event.currentTarget;
+    // Determine the new controlType
+    const controlType = clickedDiv.id || clickedDiv.getAttribute("eventkey");
+    // Update the selected control type
+    setSelectedControlType(controlType);
+    // Initialize state for the new control type if not already done
+    initializeControlState(controlType);
+    // If you need to update date-related properties, do it here
+    // Example: updateState(someDateValue, 'dateProperty', controlType)
+    // Update the control code
+    setControlCode(getControlCodeTemplate());
   };
 
   // Function to update state based on input type and controlType
@@ -104,7 +99,6 @@ export default function Inputs() {
     // Ensure the state for this controlType is initialized
     initializeControlState(controlType);
     console.log("Updating state for", controlType, property, value);
-
     // Update the specific property for the given controlType
     setControlStates((prevStates) => ({
       ...prevStates,
@@ -113,17 +107,7 @@ export default function Inputs() {
         [property]: value,
       },
     }));
-  };
-
-  // Function to handle the div click event
-  const handleDivClick = (event) => {
-    // Accessing the clicked div
-    const clickedDiv = event.currentTarget;
-    // Update the selectedControlType state with the id of the clicked div
-    const controlType =
-      event.currentTarget.id || clickedDiv.getAttribute("eventkey");
-    setSelectedControlType(controlType);
-    setControlCode(controlType);
+    setControlCode(getControlCodeTemplate());
   };
 
   const alert = (
@@ -164,7 +148,7 @@ export default function Inputs() {
                     onSelect={setSelectedControlType}
                     className="flex-column"
                   >
-                    {controlTypes.map((control, controlIndex) => (
+                    {controlTypes.map((control) => (
                       <NavItem key={control.type}>
                         <NavLink
                           href={`#${control.type}`}
@@ -208,51 +192,11 @@ export default function Inputs() {
                     </Card.Header>
                     <Card.Body>
                       <BoltInput
-                        label={controlStates[control.type]?.label}
+                        {...controlStates[control.type]}
                         controlType={control.type}
-                        copy={controlStates[control.type]?.copy}
-                        isInvalid={controlStates[control.type]?.isInvalid}
-                        placeholder={controlStates[control.type]?.placeholder}
-                        helper_text={controlStates[control.type]?.helper_text}
-                        noLabel={controlStates[control.type]?.noLabel}
-                        min={controlStates[control.type]?.min}
-                        modal={controlStates[control.type]?.modal}
-                        max={controlStates[control.type]?.max}
-                        tooltip_text={controlStates[control.type]?.tooltip_text}
-                        errorMessageIfInvalid={
-                          controlStates[control.type]?.errorMessageIfInvalid
-                        }
-                        minRows={controlStates[control.type]?.minRows}
-                        rows={controlStates[control.type]?.rows}
-                        copyValue={controlStates[control.type]?.copyValue}
-                        pre_text={controlStates[control.type]?.pre_text}
-                        post_text={controlStates[control.type]?.post_text}
-                        flush={controlStates[control.type]?.flush}
-                        actions={controlStates[control.type]?.actions}
-                        size={controlStates[control.type]?.size}
-                        disabled={controlStates[control.type]?.disabled}
-                        step={controlStates[control.type]?.step}
-                        floatingLabel={
-                          controlStates[control.type]?.floatingLabel
-                        }
                         options={[controlStates[control.type]?.options].filter(
                           Boolean
                         )}
-                        minCharacters={
-                          controlStates[control.type]?.minCharacters
-                        }
-                        maxCharacters={
-                          controlStates[control.type]?.maxCharacters
-                        }
-                        hiddenValue={controlStates[control.type]?.hiddenValue}
-                        textIfTrue={controlStates[control.type]?.textIfTrue}
-                        textIfFalse={controlStates[control.type]?.textIfFalse}
-                        required={controlStates[control.type]?.required}
-                        showDefaultValidator={
-                          controlStates[control.type]?.showDefaultValidator
-                        }
-                        multiple={controlStates[control.type]?.multiple}
-                        readOnly={controlStates[control.type]?.readOnly}
                       />
                     </Card.Body>
                   </Card>
@@ -270,15 +214,16 @@ export default function Inputs() {
                     noLabel
                     value={controlCode}
                     copy
-                  ></BoltInput>
+                  />
                 </div>
                 <Card className="border">
                   <Accordion.Item>
-                   
                     <Card.Body className="border-bottom">
                       <div>
                         <Card.Title>Options</Card.Title>
-                        <Card.Text>These options reflect the component's prop attributes.</Card.Text>
+                        <Card.Text>
+                          These options reflect the component's prop attributes.
+                        </Card.Text>
                       </div>
                     </Card.Body>
                     <Card.Body className="bg-light scrollable">
