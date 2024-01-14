@@ -24,6 +24,7 @@ export default function Inputs() {
   // Dynamic state object for each controlType
   const [controlStates, setControlStates] = useState({});
   const [selectedControlType, setSelectedControlType] = useState("text");
+  console.log("controlStates", controlStates)
 
   // Initial state setup
   let initialState = {};

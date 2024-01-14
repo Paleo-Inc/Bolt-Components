@@ -316,7 +316,7 @@ const BoltInput = ({
         {/* Render each action as a button */}
         {RenderInputActions({ actions })}
 
-{/* //Not set up yet */}
+        {/* //Not set up yet */}
         {clearable && (
           <Button
             onClick={(e) => {
