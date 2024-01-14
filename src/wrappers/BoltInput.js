@@ -156,7 +156,7 @@ const BoltInput = ({
 
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
-    console.log("Selected files:", selectedFiles);
+    // console.log("Selected files:", selectedFiles);
     if (selectedFiles.length > 0) {
       setValue(selectedFiles); // Assuming setValue is designed to handle an array
       setFiles(selectedFiles); // Update the state with the selected files
@@ -296,7 +296,7 @@ const BoltInput = ({
     <BaseInputWrapper {...baseInputWrapperProps}>
       <InputGroup className={`${input_group_classes}`}>
         {pre_text ? (
-          <InputGroup.Text className={hideClasses} id={id}>
+          <InputGroup.Text className={className} id={id}>
             {pre_text}
           </InputGroup.Text>
         ) : null}
@@ -308,7 +308,7 @@ const BoltInput = ({
         )}
 
         {post_text ? (
-          <InputGroup.Text className={hideClasses} id={id}>
+          <InputGroup.Text className={className} id={id}>
             {post_text}
           </InputGroup.Text>
         ) : null}

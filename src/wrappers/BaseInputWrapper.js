@@ -78,8 +78,6 @@ const BaseInputWrapper = ({
   //   describeId,
   // );
 
-  console.log("Column:", column);
-
   // Return the JSX for the BaseInputWrapper component
   return (
     <Form.Group as={Col} className={`mb-3 col-${column}`} {...props}>
