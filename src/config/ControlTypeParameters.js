@@ -45,6 +45,7 @@ class ControlTypeParameters {
     default_max: null,
   };
 
+  //Can be removed , i ended up deleting this control type
   static password = {
     data_type: "string",
     default_label: "Password",
