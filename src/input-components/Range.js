@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { InputGroup } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
@@ -26,6 +26,8 @@ const RangeInput = ({
   copy,
   copyValue,
   actions,
+  aria_describedby,
+  aria_labelledby,
   ...props
 }) => {
   return (
@@ -39,14 +41,14 @@ const RangeInput = ({
         placeholder={placeholder}
         isInvalid={isInvalid}
         onBlur={onBlur}
-        min={min || 0}
-        max={max || 100}
+        min={min}
+        max={max}
         onChange={onChange}
         className={`${flush ? "form-control-flush" : ""}`}
         {...props}
         id={elementId}
-        aria-labelledby={`${elementId}-label`}
-        aria-describedby={helper_text ? `${elementId}-describe` : ""}
+        aria-labelledby={aria_labelledby}
+        aria-describedby={aria_describedby}
       />
 
       <InputGroup.Text className="form-control-flush">

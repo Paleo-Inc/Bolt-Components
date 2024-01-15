@@ -13,7 +13,6 @@ const FileInput = ({
   type,
   onChange,
   errorMessageIfInvalid,
-  handleFileChange,
   controlType,
   minCharacters,
   maxCharacters,
@@ -43,7 +42,7 @@ const FileInput = ({
         minLength={minCharacters}
         maxLength={maxCharacters}
         accept={acceptedFileTypes}
-        onChange={handleFileChange} // Use handleFileChange instead of onChange
+        onChange={onChange} // Use handleFileChange instead of onChange
         className={className}
         multiple={multiple}
         {...props}

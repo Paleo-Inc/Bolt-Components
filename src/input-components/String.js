@@ -22,7 +22,6 @@ const String = ({
   children,
   hiddenValue,
   flush,
-  handleSelect,
   options,
   id,
   copy,
@@ -94,34 +93,6 @@ const String = ({
         return (
           <>
             <div className="d-flex gap-2">
-              <div>
-                <DropdownButton
-                  variant="outline-secondary"
-                  title={value || "Select a color"}
-                  id="input-group-dropdown-1"
-                  onSelect={handleSelect}
-                  onChange={onChange}
-                >
-                  {colorOptions.map((option, index) => (
-                    <Dropdown.Item key={index} eventKey={option.value}>
-                      <div className="d-flex aic gap-3">
-                        <div
-                          className="border rounded"
-                          style={{
-                            backgroundColor: option.value,
-                            minHeight: "30px", // or any other value that suits your design
-                            minWidth: "40px",
-                            height: "30px",
-                            width: "40px",
-                          }}
-                        ></div>
-                        <div>{option.value}</div>
-                      </div>
-                    </Dropdown.Item>
-                  ))}
-                </DropdownButton>
-              </div>
-
               <div>
                 <Form.Control
                   className="p-0 rounded-end"

@@ -132,5 +132,8 @@ class Validators {
     // If all checks pass, return true (valid) with an empty message
     return { valid: true, message: "" };
   }
+  static validAssistantName(){
+    return { valid: true, message: "" };
+  }
 }
 export { Validators };

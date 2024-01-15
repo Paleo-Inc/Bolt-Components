@@ -24,7 +24,7 @@ export default function Inputs() {
   // Dynamic state object for each controlType
   const [controlStates, setControlStates] = useState({});
   const [selectedControlType, setSelectedControlType] = useState("text");
-  console.log("controlStates", controlStates)
+  console.log("controlStates", controlStates);
 
   // Initial state setup
   let initialState = {};
@@ -190,9 +190,6 @@ export default function Inputs() {
                         options={[controlStates[control.type]?.options].filter(
                           Boolean
                         )}
-                        onChange={(e) =>
-                          handleInputChange(e.target.value, control.type)
-                        }
                       />
                     </Card.Body>
                   </Card>

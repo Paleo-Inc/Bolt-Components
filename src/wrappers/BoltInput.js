@@ -11,6 +11,7 @@ import InputValidator from "../helpers/hooks/InputValidator";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import RenderInputActions from "../helpers/functions/RenderInputActions";
 import Config from "../config/Config";
+import useInputChangeHandler from "../helpers/hooks/HandleInputChange";
 
 const config = new Config();
 //The below should be in its file and have default states already set up.  Search "TODO OPTIONS" for related.
@@ -134,39 +135,48 @@ const BoltInput = ({
     }
   };
 
-  // Handler for selection from dropdown
-  const handleSelect = (eventKey) => {
-    console.log("Selected Value: ", eventKey);
-    setValue(eventKey);
-  };
+  const { handleInputChange } = useInputChangeHandler(
+    setValue,
+    setFiles,
+    onChange,
+    prevent_spaces,
+    Helpers,
+    controlType
+  );
 
-  // Generalized input change handler // There is already a function like this in the BaseInputWrapper; can use it
-  const handleInputChange = (e) => {
-    const { type, checked, value: inputValue } = e.target;
-    const finalValue =
-      type === "checkbox" || type === "switch"
-        ? checked
-        : prevent_spaces
-        ? Helpers.removeSpaces(inputValue)
-        : inputValue;
+  // // Handler for selection from dropdown
+  // const handleSelect = (eventKey) => {
+  //   console.log("Selected Value: ", eventKey);
+  //   setValue(eventKey);
+  // };
 
-    setValue(finalValue);
-    onChange?.(e, finalValue);
-  };
+  // // Generalized input change handler // There is already a function like this in the BaseInputWrapper; can use it
+  // const handleInputChange = (e) => {
+  //   const { type, checked, value: inputValue } = e.target;
+  //   const finalValue =
+  //     type === "checkbox" || type === "switch"
+  //       ? checked
+  //       : prevent_spaces
+  //       ? Helpers.removeSpaces(inputValue)
+  //       : inputValue;
 
-  const handleFileChange = (e) => {
-    const selectedFiles = Array.from(e.target.files);
-    // console.log("Selected files:", selectedFiles);
-    if (selectedFiles.length > 0) {
-      setValue(selectedFiles); // Assuming setValue is designed to handle an array
-      setFiles(selectedFiles); // Update the state with the selected files
+  //   setValue(finalValue);
+  //   onChange?.(e, finalValue);
+  // };
 
-      // If there's an additional onChange handler passed as a prop, call it with all selected files
-      if (onChange) {
-        onChange(selectedFiles);
-      }
-    }
-  };
+  // const handleFileChange = (e) => {
+  //   const selectedFiles = Array.from(e.target.files);
+  //   // console.log("Selected files:", selectedFiles);
+  //   if (selectedFiles.length > 0) {
+  //     setValue(selectedFiles); // Assuming setValue is designed to handle an array
+  //     setFiles(selectedFiles); // Update the state with the selected files
+
+  //     // If there's an additional onChange handler passed as a prop, call it with all selected files
+  //     if (onChange) {
+  //       onChange(selectedFiles);
+  //     }
+  //   }
+  // };
 
   // Handlers for focus and blur events
   const handleInputFocus = () => setIsInputFocused(true);
@@ -207,7 +217,6 @@ const BoltInput = ({
     onBlur: combinedOnBlurHandler,
     onFocus: handleInputFocus,
     onChange: handleInputChange,
-    handleFileChange: handleFileChange,
     minRows: minRows,
     checked: value,
     validationCheck,
@@ -232,7 +241,6 @@ const BoltInput = ({
     prevent_spaces: prevent_spaces,
     className: className,
     cyId: cyId,
-    handleSelect: handleSelect,
     multiple,
     readOnly,
     acceptedFileTypes,
