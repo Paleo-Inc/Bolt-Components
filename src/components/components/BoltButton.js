@@ -7,67 +7,127 @@ const BoltButton = ({
   size,
   disabled,
   variant,
-  icon,
   label,
-  action,
+  onClick,
+  active,
+  icon,
   confirm,
-  helper_text, // Accept helperText as a prop
+  helper_text,
+  id,
+  href,
+  type,
+  loading,
+  className,
 }) => {
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [showConfirmationButtons, setShowConfirmationButtons] = useState(false);
+  label = label || "Button";
+  const iconSize = "15";
+  console.log("Confirmed: ", isConfirmed);
+  console.log("showConfirmationButtons", showConfirmationButtons);
 
   const handleClick = () => {
-    if (!confirm || isConfirmed) {
-      action();
-      if (confirm) setIsConfirmed(false);
+    if (confirm) {
+      // If confirmation is required, only show the confirmation buttons
+      setShowConfirmationButtons(true);
     } else {
-      setIsConfirmed(true);
+      // If no confirmation is needed, check if onClick is a function
+      if (typeof onClick === "function") {
+        onClick();
+      } else {
+        console.error("Error: The provided onClick is not a function.");
+      }
     }
   };
 
-  const renderButtonContent = (iconName, text) => (
-    <div className="d-flex align-items-center gap-2">
-      {iconName && <FeatherIcon size="15" icon={iconName} />}
-      {text}
-    </div>
-  );
-
-  const renderButton = () => (
+  const mainButton = () => (
     <Button
       size={size}
-      disabled={confirm && isConfirmed ? true : disabled}
-      variant={confirm && isConfirmed ? "secondary" : variant}
+      active={active}
+      id={id}
+      type={confirm ? null : type}
+      href={href}
+      disabled={disabled || (loading && true)}
+      variant={variant}
       onClick={handleClick}
+      className={className}
     >
-      {renderButtonContent(
-        confirm && !isConfirmed ? icon : null,
-        confirm && isConfirmed ? "Are you sure?" : label
-      )}
+      <div className="d-flex align-items-center gap-2">
+        {icon && <FeatherIcon size={iconSize} icon={icon} />}
+        {label}
+        {loading && (
+          <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        )}
+      </div>
     </Button>
   );
 
-  return (
-    <ButtonGroup aria-label="Confirmable button group">
-      {helper_text ? (
-        <BoltTooltip content={helper_text}>{renderButton()}</BoltTooltip>
-      ) : (
-        renderButton()
-      )}
+  // const handleConfirmation = (confirmation) => {
+  //   if (confirmation) {
+  //     if (type === "submit") {
+  //       // Programmatically submit the form
+  //       const form = event.target.closest("form");
+  //       if (form) {
+  //         form.submit();
+  //       }
+  //     } else if (typeof onClick === "function") {
+  //       onClick();
+  //     }
+  //   }
+  //   // Reset confirmation state
+  //   setIsConfirmed(false);
+  //   setShowConfirmationButtons(false);
+  // };
 
-      {confirm && isConfirmed && (
-        <>
-          <Button
-            size={size}
-            variant="light"
-            onClick={() => setIsConfirmed(false)}
-          >
-            {renderButtonContent(null, "No")}
-          </Button>
-          <Button size={size} variant="light" onClick={action}>
-            {renderButtonContent(null, "Yes")}
-          </Button>
-        </>
-      )}
-    </ButtonGroup>
+  const renderConfirmButtons = () => (
+    <div>
+      <div className="mb-1">Are you sure?</div>
+      <ButtonGroup aria-label="Confirmable button group">
+        <Button
+          size={size}
+          variant="light"
+          onClick={() => {
+            setIsConfirmed(false);
+            setShowConfirmationButtons(false);
+          }}
+        >
+          <div className="d-flex align-items-center gap-2">
+            <span>No </span>
+            <FeatherIcon size={iconSize} icon={"x"} />
+          </div>
+        </Button>
+        <Button
+          size={size}
+          variant="light"
+          type={type}
+          onClick={() => {
+            if (onClick) {
+              onClick();
+              setIsConfirmed(true);
+              setShowConfirmationButtons(false);
+            }
+          }}
+        >
+          <div className="d-flex align-items-center gap-2">
+            <span>Yes </span>
+            <FeatherIcon size={iconSize} icon={"check"} />
+          </div>
+        </Button>
+      </ButtonGroup>
+    </div>
+  );
+
+  return (
+    <>
+      {helper_text
+        ? !showConfirmationButtons && (
+            <BoltTooltip content={helper_text}>{mainButton()}</BoltTooltip>
+          )
+        : !showConfirmationButtons && mainButton()}
+      {confirm && showConfirmationButtons && renderConfirmButtons()}
+    </>
   );
 };
 

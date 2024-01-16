@@ -166,7 +166,7 @@ export default function Inputs() {
                   id={control.type}
                   className={
                     selectedControlType === control.type
-                      ? "shadow-sm rounded sticky-top"
+                      ? "shadow-sm rounded sticky-top z-1"
                       : "d-none"
                   }
                 >
@@ -198,7 +198,7 @@ export default function Inputs() {
             </Col>
 
             <Col xs={12} sm={6} md={5}>
-              <div className="sticky-top">
+              <div className="">
                 <div className="position-relative">
                   <SyntaxHighlighter
                     className="p-3 rounded"
