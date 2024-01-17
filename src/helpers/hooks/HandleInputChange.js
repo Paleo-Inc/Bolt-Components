@@ -15,14 +15,31 @@ const useInputChangeHandler = (
       label: selectedOption.text,
       value: selectedOption.value,
     };
-    // console.log("Selected object: ", selectedObject);
-    const returnValue =
-      returnformat === "object" && "select"
-        ? selectedObject
-        : selectedObject.value;
+
+    let returnValue;
+
+    if (returnformat) {
+      switch (returnformat) {
+        case "labelvalue":
+          returnValue = selectedObject;
+          break;
+        case "value":
+          returnValue = selectedObject.value;
+          break;
+        case "target":
+          returnValue = e.target;
+          break;
+        default:
+          console.log("Invalid return format, defaulting to value");
+          returnValue = selectedObject.value;
+      }
+    } else {
+      returnValue = selectedObject.value;
+    }
+
     if (setValue) setValue(returnValue);
     if (onChange) onChange(returnValue);
-    console.log("Selected object: ", returnValue);
+    console.log("Return value: ", returnValue);
   };
 
   // Generalized input change handler
