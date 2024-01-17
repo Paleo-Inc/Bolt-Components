@@ -30,6 +30,7 @@ const BoltInput = ({
   min,
   max,
   minCharacters,
+  returnformat,
   maxCharacters,
   children,
   step,
@@ -105,6 +106,7 @@ const BoltInput = ({
   aria_label = placeholder;
   aria_labelledby = `${id}-label`;
   aria_describedby = helper_text ? helper_text : `${id}-describe`;
+  returnformat = returnformat || "default";
 
   const [className, setClassName] = useState("");
   const [isInputVisible, setIsInputVisible] = useState(true);

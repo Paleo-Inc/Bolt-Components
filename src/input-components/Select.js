@@ -22,6 +22,7 @@ const SelectInput = ({
   copy,
   copyValue,
   cyId,
+  returnformat,
   options,
   actions,
   ...props
@@ -45,6 +46,7 @@ const SelectInput = ({
       options={options}
       onChange={onChange}
       className={className}
+      returnformat={returnformat}
       cyId={cyId}
       id={elementId}
       aria-labelledby={`${elementId}-label`}
